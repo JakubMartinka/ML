@@ -1,0 +1,12 @@
+createMLmodel
+XYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/xyz_train_1k.dat
+YgradXYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/new_grads_s0_train_1k.dat
+Yfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/en_MCH_s0_train_1k.dat
+molDescriptor=RE
+kernel=Gaussian
+sigma=opt lgsigmal=-10
+lambda=opt NlgLambda=12 lglambdal=-30 lglambdah=-1
+minimizeError=RMSE
+MLmodelOut=1k_s0_grenADC.unf
+prior=mean
+nthreads=8

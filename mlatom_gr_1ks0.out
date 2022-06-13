@@ -1,0 +1,359 @@
+
+
+  !---------------------------------------------------------------------------!
+  !                                                                           !
+  !     MLatom: a Package for Atomistic Simulations with Machine Learning     !
+  !                               Version 2.2                                 !
+  !                           http://mlatom.com/                              !
+  !                                                                           !
+  !                  Copyright (c) 2013-2022 Pavlo O. Dral                    !
+  !                           http://dr-dral.com/                             !
+  !                                                                           !
+  ! All rights reserved. This work is licensed under the                      !
+  ! Attribution-NonCommercial-NoDerivatives 4.0 International                 ! 
+  ! (http://creativecommons.org/licenses/by-nc-nd/4.0/) license.              !
+  ! See LICENSE.CC-BY-NC-ND-4.0.                                              !
+  !                                                                           !
+  ! The above copyright notice and this permission notice shall be included   !
+  ! in all copies or substantial portions of the Software.                    !
+  !                                                                           !
+  ! The software is provided "as is", without warranty of any kind, express   !
+  ! or implied, including but not limited to the warranties of                !
+  ! merchantability, fitness for a particular purpose and noninfringement. In !
+  ! no event shall the authors or copyright holders be liable for any claim,  !
+  ! damages or other liability, whether in an action of contract, tort or     !
+  ! otherwise, arising from, out of or in connection with the software or the !
+  ! use or other dealings in the software.                                    !
+  !                                                                           !
+  !                                Cite as:                                   !
+  ! Pavlo O. Dral, J. Comput. Chem. 2019, 40, 2339-2347                       !
+  ! Pavlo O. Dral, Fuchun Ge, Bao-Xin Xue, Yi-Fan Hou, Max Pinheiro Jr,       !
+  ! Jianxing Huang, Mario Barbatti, Top. Curr. Chem. 2021, 379, 27            !
+  !                                                                           !
+  ! Pavlo O. Dral, Peikun Zheng, Bao-Xin Xue, Fuchun Ge, Yi-Fan Hou,          !
+  ! Max Pinheiro Jr,                                                          !
+  ! MLatom: A Package for Atomistic Simulations with Machine Learning         !
+  ! version 2.2, Xiamen University, Xiamen, China, 2013-2022                  !
+  !                                                                           !  
+  !---------------------------------------------------------------------------!
+
+
+ ============================================================================== 
+ MLatom started on 10.06.2022 at 10:52:14
+        with the following options:
+        /home/jakubm/WORK/mlatom/bin/MLatom.py mlatom_gr_1ks0.inp
+
+        Input file content:
+ ______________________________________________________________________________ 
+createMLmodel
+XYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/xyz_train_1k.dat
+YgradXYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/new_grads_s0_train_1k.dat
+Yfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/en_MCH_s0_train_1k.dat
+molDescriptor=RE
+kernel=Gaussian
+sigma=opt lgsigmal=-10
+lambda=opt NlgLambda=12 lglambdal=-30 lglambdah=-1
+minimizeError=RMSE
+MLmodelOut=1k_s0_grenADC.unf
+prior=mean
+nthreads=8
+ ______________________________________________________________________________ 
+ ============================================================================== 
+
+ ****************************************************************************** 
+
+ You are going to use feature(s) listed below. 
+ Please cite corresponding work(s) in your paper:
+
+ KREG model:
+   P. O. Dral, A. Owens, S. N. Yurchenko, W. Thiel,
+   J. Chem. Phys. 2017, 146, 244108
+
+ ****************************************************************************** 
+> /home/jakubm/WORK/mlatom/bin/MLatomF createMLmodel XYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/xyz_train_1k.dat Yfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/en_MCH_s0_train_1k.dat YgradXYZfile=/home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/new_grads_s0_train_1k.dat MLmodelOut=1k_s0_grenADC.unf molDescriptor=RE kernel=Gaussian sigma=opt lgsigmal=-10 lambda=opt NlgLambda=12 lglambdal=-30 lglambdah=-1 minimizeError=RMSE prior=mean
+
+  !---------------------------------------------------------------------------! 
+  ! MLatomF: Fortran + OpenMP part of MLatom                                  ! 
+  ! Implementations by: Pavlo O. Dral and Yi-Fan Hou                          ! 
+  !---------------------------------------------------------------------------! 
+
+
+ MLatomF started on 10.06.2022 at 10:52:14
+
+ ___________________________________________________________
+
+ Calculations with the following options:
+
+    Input options
+      Nuse:                ALL
+      XYZfile:             /home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/xyz_train_1k.dat
+      Yfile:               /home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/en_MCH_s0_train_1k.dat
+      YgradXYZfile:        /home/jakubm/WORK/ML/TRAINING_SETS/BrEt/test_ADC2_1k/new_grads_s0_train_1k.dat
+
+    Output options
+      MLmodelOut:          1k_s0_grenADC.unf
+
+    Sub-set sizes and splitting options
+      Training set:        the entire dataset
+      Sub-training set:    80% of the training set
+      Validating with:     all points of the training set except for the sub-training set points
+
+    Data set operations
+      sampling:            random
+
+    ML task:
+                           create ML model
+    KRR task:              learn combined value and gradient information
+
+    ML algorithm:          KRR
+      error to minimize:   RMSE
+      depth of log. opt.:  3
+      lambda:              OPT
+      NlgLambda:           12
+      lgLambdaL:           -30
+      lgLambdaH:           -1
+      Kernel:              Gaussian
+        sigma:             OPT
+        NlgSigma:          6
+        lgSigmaL:          -10
+        lgSigmaH:          9
+      prior:               mean
+    Program run options:
+      Cholesky decomposition
+                           calculate and store kernel matrix
+                           elements for validation
+
+
+    Molecular descriptor:  unsorted RE
+
+ ___________________________________________________________
+
+  Equilibrium distances: 
+1     1-2      1.890240298507
+2     1-3      2.828211274965
+3     1-4      2.506497077316
+4     1-5      3.819213990603
+5     1-6      3.002803286022
+6     2-3      1.307544529185
+7     2-4      1.070221582384
+8     2-5      2.060208019446
+9     2-6      2.091841213148
+10     3-4      2.101691016124
+11     3-5      1.074548780312
+12     3-6      1.072774855389
+13     4-5      2.433099208820
+14     4-6      3.062501093748
+15     5-6      1.839571223876
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Cholesky decomposition failed. Attempting Bunch-Kaufman decomposition
+  WARNING: UNABLE TO CALCULATE LINEAR REGRESSION
+ Optimal value of lambda is          0.00025880395011
+ Optimal value of sigma is          0.82817066133454
+ Prior value =       -2650.3156442287500
+ Analysis for values
+ Statistical analysis for 800 entries in the sub-training set
+   MAE =           0.0114563462001
+   MSE =          -0.0000011507832
+   RMSE =           0.0143009130362
+   mean(Y) =       -2650.3156442287500
+   mean(Yest) =       -2650.3156453795327
+   correlation coefficient =           0.9732216441153
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9471602747693
+     a =        -652.0768742593591
+     b =           0.7539625612034
+     SE_a =          16.7076155522722
+     SE_b =           0.0063040097077
+   largest positive outlier
+     error =           0.0238502347547
+     index = 434
+     estimated value =       -2650.2896665652452
+     reference value =       -2650.3135167999999
+   largest negative outlier
+     error =          -0.0691234016704
+     index = 372
+     estimated value =       -2650.1563055016704
+     reference value =       -2650.0871821000001
+ Analysis for gradients in XYZ coordinates
+ Statistical analysis for 800 entries in the sub-training set
+   MAE =           0.0011832396606
+   MSE =          -0.0000000000218
+   RMSE =           0.0019887121556
+   mean(Y) =           0.0000000000218
+   mean(Yest) =          -0.0000000000000
+   correlation coefficient =           0.9989975010130
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9979960070303
+     a =          -0.0000000000220
+     b =           1.0072060390660
+     SE_a =           0.0000166283824
+     SE_b =           0.0003821607202
+   largest positive outlier
+     error =           0.0413712483525
+     estimated value =           0.0118943946221
+     reference value =          -0.0294768537304
+   largest negative outlier
+     error =          -0.0416820114844
+     estimated value =           0.0002663200641
+     reference value =           0.0419483315485
+
+ Analysis for values
+ Statistical analysis for 200 entries in the validation set
+   MAE =           0.0124892458289
+   MSE =           0.0000788306670
+   RMSE =           0.0159970157386
+   mean(Y) =       -2650.3188574130008
+   mean(Yest) =       -2650.3187785823329
+   correlation coefficient =           0.9773637669624
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9552393758321
+     a =        -846.2841986129604
+     b =           0.6806858634852
+     SE_a =          27.7526348600951
+     SE_b =           0.0104714324385
+   largest positive outlier
+     error =           0.0248991129024
+     index = 433
+     estimated value =       -2650.2924952870976
+     reference value =       -2650.3173944000000
+   largest negative outlier
+     error =          -0.0820742554065
+     index = 403
+     estimated value =       -2650.2187889554066
+     reference value =       -2650.1367147000001
+ Analysis for gradients in XYZ coordinates
+ Statistical analysis for 200 entries in the validation set
+   MAE =           0.0016358669508
+   MSE =          -0.0000000000242
+   RMSE =           0.0037009568274
+   mean(Y) =           0.0000000000242
+   mean(Yest) =          -0.0000000000000
+   correlation coefficient =           0.9962197408728
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9924537721046
+     a =          -0.0000000000243
+     b =           1.0040402585349
+     SE_a =           0.0000621019474
+     SE_b =           0.0014706661120
+   largest positive outlier
+     error =           0.0775321049779
+     estimated value =           0.1235629848293
+     reference value =           0.0460308798514
+   largest negative outlier
+     error =          -0.0451746487915
+     estimated value =           0.0559666932180
+     reference value =           0.1011413420095
+
+ CREATE AND SAVE FINAL ML MODEL
+
+ Prior value =       -2650.3162868656000
+ Analysis for values
+ Statistical analysis for 1000 entries in the training set
+   MAE =           0.0115771755508
+   MSE =          -0.0000010218278
+   RMSE =           0.0144588446936
+   mean(Y) =       -2650.3162868655995
+   mean(Yest) =       -2650.3162878874277
+   correlation coefficient =           0.9747145584083
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9500682965840
+     a =        -683.7808918029320
+     b =           0.7420002683567
+     SE_a =          14.2707656800541
+     SE_b =           0.0053845519301
+   largest positive outlier
+     error =           0.0234949943365
+     index = 892
+     estimated value =       -2650.3529397056636
+     reference value =       -2650.3764347000001
+   largest negative outlier
+     error =          -0.0723348676661
+     index = 372
+     estimated value =       -2650.1595169676661
+     reference value =       -2650.0871821000001
+ Analysis for gradients in XYZ coordinates
+ Statistical analysis for 1000 entries in the training set
+   MAE =           0.0012249864810
+   MSE =          -0.0000000000223
+   RMSE =           0.0020600749338
+   mean(Y) =           0.0000000000223
+   mean(Yest) =           0.0000000000000
+   correlation coefficient =           0.9989124997399
+   linear regression of {y, y_est} by f(a,b) = a + b * y
+     R^2 =           0.9978261821366
+     a =          -0.0000000000225
+     b =           1.0075379113145
+     SE_a =           0.0000153790606
+     SE_b =           0.0003555502305
+   largest positive outlier
+     error =           0.0405617430769
+     estimated value =          -0.0038618434288
+     reference value =          -0.0444235865057
+   largest negative outlier
+     error =          -0.0442383967767
+     estimated value =          -0.0022900652282
+     reference value =           0.0419483315485
+
+ FINAL ML MODEL CREATED AND SAVED
+
+
+ Wall-clock time:   10543.98 sec
+
+ MLatomF terminated on 10.06.2022 at 13:47:58
+
+ ============================================================================== 
+ Wall-clock time: 10544.01 s (175.73 min, 2.93 hours)
+
+ MLatom terminated on 10.06.2022 at 13:47:58
+ ============================================================================== 
